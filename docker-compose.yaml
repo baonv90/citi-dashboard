@@ -1,0 +1,29 @@
+version: "3.8"
+
+services: 
+  backend:
+    image: quizz-back
+    build:
+      context: backend
+    restart: always
+    environment: 
+      DEBUG: 1
+    ports: 
+      - 8010:8000
+    volumes:
+      - ./backend/src:/app/backend
+
+  # frontend:
+  frontend:
+    image: quizz-front
+    build:
+      context: frontend
+    stdin_open: true
+    restart: always
+    environment:
+      DEBUG: 1
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules/
